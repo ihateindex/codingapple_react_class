@@ -42,6 +42,7 @@ function App() {
         newArray2.unshift(0);
         글제목변경(newArray);
         따봉변경(newArray2);
+        입력값변경('');
     }
 
     function 따봉플러스(idx) {
@@ -77,7 +78,7 @@ function App() {
             })}
 
             <div className='publish'>
-                <input onChange={ (e)=>{입력값변경(e.target.value)} } />
+                <input onChange={ (e)=>{입력값변경(e.target.value)} } value={입력값} />
                 <button onClick={글제목추가}>저장</button>
             </div>
 
