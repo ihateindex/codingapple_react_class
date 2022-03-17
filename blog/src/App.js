@@ -14,8 +14,11 @@ function App() {
     let [입력값, 입력값변경] = useState('');
 
     function 제목바꾸기() {
+        // 원래 있던 글제목 배열을 복사해서 변수 newArray에 담는다.
         var newArray = [...글제목];
+        // newArray 배열에서 변경을 원하는 부분을 바꾼다.
         newArray[0] = '여자 코트 추천';
+        // 글제목 배열의 setState인 글제목변경에 newArray를 넣어 글제목을 바꿔준다.
         글제목변경(newArray);
     }
 
@@ -32,6 +35,23 @@ function App() {
         modal변경(!modal);
     }
 
+    function 글제목추가() {
+        var newArray = [...글제목];
+        newArray.unshift(입력값);
+        var newArray2 = [...따봉];
+        newArray2.unshift(0);
+        글제목변경(newArray);
+        따봉변경(newArray2);
+    }
+
+    function 따봉플러스(idx) {
+        var 새로운따봉값 = 따봉[idx] + 1;
+        var newArray = [...따봉];
+        newArray[idx] = 새로운따봉값;
+        따봉변경(newArray);
+    }
+
+
     return (
         <div className="App">
             <div className="black-nav">
@@ -41,13 +61,13 @@ function App() {
             <button onClick={ 제목정렬 }>제목정렬</button> */}
             {글제목.map(function (글, idx) {
                 return (
-                    <div className="list">
+                    <div className="list" key={idx}>
                         <h3
                             onClick={() => {
                                 누른제목변경(idx);
                             }}
                         >
-                            {글} <span> 👍 </span>
+                            {글} <span onClick={()=>따봉플러스(idx)}> 👍 </span>
                             {따봉[idx]}
                         </h3>
                         <p>2월 19일 발행</p>
@@ -55,7 +75,12 @@ function App() {
                     </div>
                 );
             })}
-            <input onChange={ (e)=>{ 입력값변경(e.target.value)} }></input>
+
+            <div className='publish'>
+                <input onChange={ (e)=>{입력값변경(e.target.value)} } />
+                <button onClick={글제목추가}>저장</button>
+            </div>
+
             <button onClick={모달스위치}>열고닫기</button>
             {modal === true ? <Modal 글제목={글제목} 누른제목={누른제목}></Modal> : null}
         </div>
