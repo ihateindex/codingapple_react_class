@@ -8,7 +8,6 @@ import { Link, Route, Switch } from 'react-router-dom';
 
 function App() {
     let [shoes, shoes변경] = useState(data);
-    console.log(shoes);
 
     return (
         <div className="App">
@@ -48,19 +47,19 @@ function App() {
                     </div>
                     <div className="container">
                         <div className="row">
-                            {shoes.map(function (shoes, idx) {
+                            {shoes.map(function (shoe, idx) {
                                 return (
                                     // * 기본
                                     // <Card key={idx} id={shoes.id} title={shoes.title} content={shoes.content} price={shoes.price}></Card>
                                     // * 축약형
-                                    <Card key={idx} idx={idx} shoes={shoes}></Card>
+                                    <Card key={idx} idx={idx} shoes={shoes[idx]}></Card>
                                 );
                             })}
                         </div>
                     </div>
                 </Route>
-                <Route path="/detail">
-                    <Detail></Detail>
+                <Route path="/detail/:id">
+                    <Detail shoes={shoes}></Detail>
                 </Route>
                 <Route path="/:id">
                     <div>아무거나 적었을때 이거 보여주셈</div>
