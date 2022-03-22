@@ -41,9 +41,12 @@ function App() {
       </div>
       <div className='container'>
         <div className='row'>
-          {shoes.map(function(shoe, idx) {
+          {shoes.map(function(shoes, idx) {
             return(
-              <Product key={idx} id={shoe.id} title={shoe.title} content={shoe.content} price={shoe.price}></Product>
+              // * 기본
+              // <Card key={idx} id={shoes.id} title={shoes.title} content={shoes.content} price={shoes.price}></Card>
+              // * 축약형
+              <Card key={idx} idx={idx} shoes={shoes}></Card>
             )
           })}
         </div>
@@ -52,12 +55,12 @@ function App() {
   );
 }
 
-function Product(props) {
+function Card(props) {
   return (
     <div className='col-md-4'>
-      <img src={"https://codingapple1.github.io/shop/shoes"+(props.id+1)+".jpg"} alt="" width="100%"/>
-      <h4>{props.title}</h4>
-      <p>{props.content} & {props.price}</p>
+      <img src={"https://codingapple1.github.io/shop/shoes"+(props.idx+1)+".jpg"} alt="" width="100%"/>
+      <h4>{props.shoes.title}</h4>
+      <p>{props.shoes.content} & {props.shoes.price}</p>
     </div>
   );
 }
