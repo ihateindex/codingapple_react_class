@@ -8,6 +8,7 @@ let 박스 = styled.div`
 
 let 제목 = styled.h4`
     font-size: 25px;
+    color : ${ props => props.색상 }
 `;
 
 function Detail(props) {
@@ -44,7 +45,9 @@ function Detail(props) {
     return (
         <div className="container">
             <박스>
-                <제목>Detail</제목>
+                <제목 색상={'red'}>Detail</제목>
+                {/* // * 문자만 전송한다면 props에 중괄호를 사용하지 않아도 됨 */}
+                <제목 색상="blue">Detail</제목>
             </박스>
             <div className="row">
                 <div className="col-md-6">
