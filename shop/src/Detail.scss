@@ -1,11 +1,44 @@
-/* // * Detail.js 스타일링용 */
+// * Detail.js 스타일링용 */
 
+// * 1. reset.css등의 연결
+// * import용 reset 파일등은 앞에 _를 붙여 쓸모없는 파일이라는 것을 표시
+// @import './_reset.scss';
+// * END reset.css등의 연결
+
+// * 2. SCSS에서의 변수 사용
 $메인칼라 : #ff0000;
 
 .red {
     color: $메인칼라;
 }
 
+// * END SCSS에서의 변수 사용
+
+// * 3. SASS 셀렉터 대신 쓰는 nesting
+div.container h4 {
+    h4 {
+        color: blue;
+    }
+    p {
+        color: green;
+    }
+}
+// * END SASS 셀렉터 대신 쓰는 nesting
+
+// * 5. 함수는 @mixin / @include
+// * 함수를 만들때는 mixin을 사용. 함수는 include될 위치보다 위에서 선언되어야 함
+@mixin 함수() {
+    background-color: #eeeeee;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+}
+// * END 함수는 @mixin / @include
+
+// * 4. css 복붙하지 말고 @extend
+// * extend를 사용시 해당 셀렉터의 css를 복사해옴.
 .my-alert {
     background-color: #eeeeee;
     padding: 20px;
@@ -13,6 +46,8 @@ $메인칼라 : #ff0000;
     max-width: 500px;
     width: 100%;
     margin: 0 auto;
+    // * 함수로 css 세팅시 아래 처럼 include를 해줘야 사용 가능!
+    @include 함수()
 }
 
 .my-alert2 {
@@ -23,3 +58,4 @@ $메인칼라 : #ff0000;
 .my-alert p {
     margin-bottom: 0;
 }
+// * END css 복붙하지 말고 @extend
