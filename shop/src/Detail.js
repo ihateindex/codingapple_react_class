@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import './Detail.scss';
 
 let 박스 = styled.div`
     padding: 20px;
@@ -8,11 +9,10 @@ let 박스 = styled.div`
 
 let 제목 = styled.h4`
     font-size: 25px;
-    color : ${ props => props.색상 }
+    color: ${(props) => props.색상};
 `;
 
 function Detail(props) {
-
     let { id } = useParams();
     let history = useHistory();
     // ! url 파라미터 id 값으로 배열의 index를 넣어서 사용할때 배열이 sort()등으로 정렬되어버리면 index에 맞는 내용이 바뀜
@@ -36,31 +36,43 @@ function Detail(props) {
     // * 또 다른 방법
     // * filter() 사용
     let shoe;
-    props.shoes.filter(function(elem) {
-        if(elem.id === parseInt(id)) {
+    props.shoes.filter(function (elem) {
+        if (elem.id === parseInt(id)) {
             shoe = elem;
-        };
+        }
     });
 
     return (
         <div className="container">
             <박스>
-                <제목 색상={'red'}>Detail</제목>
+                <제목 className='red'>Detail</제목>
+                {/* // * styled-components를 이용한 class없는 CSS스타일링 */}
+                {/* <제목 색상={'red'}>Detail</제목> */}
                 {/* // * 문자만 전송한다면 props에 중괄호를 사용하지 않아도 됨 */}
-                <제목 색상="blue">Detail</제목>
+                {/* <제목 색상="blue">Detail</제목> */}
+                {/* // * END styled-components를 이용한 class없는 CSS스타일링 */}
             </박스>
+            <div className='my-alert my-alert2'>
+                <p>재고가 얼마 남지 않았습니다</p>
+            </div>
+
             <div className="row">
                 <div className="col-md-6">
-                    <img src={"https://codingapple1.github.io/shop/shoes"+(shoe.id + 1)+".jpg"} width="100%" alt='' />
+                    <img src={'https://codingapple1.github.io/shop/shoes' + (shoe.id + 1) + '.jpg'} width="100%" alt="" />
                 </div>
                 <div className="col-md-6 mt-4">
                     <h4 className="pt-5">{shoe.title}</h4>
                     <p>{shoe.content}</p>
                     <p>{shoe.price}원</p>
                     <button className="btn btn-danger">주문하기</button>
-                    <button className="btn btn-danger" onClick={()=>{
-                        history.goBack();
-                    }}>뒤로가기</button>
+                    <button
+                        className="btn btn-danger"
+                        onClick={() => {
+                            history.goBack();
+                        }}
+                    >
+                        뒤로가기
+                    </button>
                 </div>
             </div>
         </div>
