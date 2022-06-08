@@ -7,12 +7,16 @@ import reportWebVitals from './reportWebVitals';
 // * 리액트 라우터 돔 import
 // * import할때 from 뒤에 경로가 없이 이름만 있다면 라이브러리임
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store.js';
 
 ReactDOM.render(
     <React.StrictMode>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
+        <Provider store={store}>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </Provider>
     </React.StrictMode>,
     document.getElementById('root')
 );
