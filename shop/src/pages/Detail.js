@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import './Detail.scss';
 import { Nav } from 'react-bootstrap';
 
 import {Context1} from '../App.js'
+import { insertCart } from './../store.js';
 
 let 박스 = styled.div`
     padding: 20px;
@@ -93,6 +95,8 @@ function Detail(props) {
         }
     }, []);
 
+    let dispatch = useDispatch()
+
     return (
         <div className={"container start " + fade2}>
             <박스>
@@ -118,7 +122,9 @@ function Detail(props) {
                     <h4 className="pt-5">{shoe.title}</h4>
                     <p>{shoe.content}</p>
                     <p>{shoe.price}원</p>
-                    <button className="btn btn-danger">주문하기</button>
+                    <button className="btn btn-danger" onClick={()=> {
+                        dispatch(insertCart({id: shoe.id, name: shoe.title, count: 1}))
+                    }}>주문하기</button>
                     <button
                         className="btn btn-danger"
                         onClick={() => {

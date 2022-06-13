@@ -1,5 +1,5 @@
 import './App.css';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { Navbar, Container, Nav, NavDropdown, Button } from 'react-bootstrap';
 import { Link, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
@@ -16,6 +16,10 @@ function App() {
     let [btnCount, setBtnCount] = useState(0);
     let [loadingTxt,setLoadingTxt] = useState(false);
     console.log(btnCount);
+
+    useEffect(() => {
+        localStorage.setItem('watched', JSON.stringify( [] ))
+    }, [])
 
     return (
         <div className="App">
@@ -36,13 +40,13 @@ function App() {
                             <Nav.Link>
                                 <Link to="/cart">Cart</Link>
                             </Nav.Link>
-                            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                            {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                            </NavDropdown>
+                            </NavDropdown> */}
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

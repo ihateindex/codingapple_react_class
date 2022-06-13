@@ -1,6 +1,7 @@
 import { Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeCount, changeName, changeAge } from './../store.js';
+import { decreaseCount, increaseCount, deleteCart } from './../store.js';
+import { changeName, changeAge } from './../store/userSlice.js';
 
 function Cart() {
     // * Redux store를 가져와주는 useSelector()
@@ -24,7 +25,7 @@ function Cart() {
         <div>
             <h6>{state.user.name} {state.user.age}의 장바구니</h6>
             <button onClick={()=>{
-                dispatch(changeAge())
+                dispatch(changeAge(1))
             }}>버튼</button>
             <Table>
                 <thead>
@@ -33,19 +34,28 @@ function Cart() {
                         <th>상품명</th>
                         <th>수량</th>
                         <th>변경하기</th>
+                        <th>삭제하기</th>
                     </tr>
                 </thead>
                 <tbody>
                     {cart.map(function (cart, idx) {
                         return (
                             <tr key={idx}>
-                                <td>{idx}</td>
+                                <td>{cart.id}</td>
                                 <td>{cart.name}</td>
                                 <td>{cart.count}</td>
                                 <td>
                                     <button onClick={()=>{
-                                        dispatch(changeCount({idx: idx}))
+                                        dispatch(decreaseCount({id: cart.id}))
+                                    }}>-</button>
+                                    <button onClick={()=>{
+                                        dispatch(increaseCount({id: cart.id}))
                                     }}>+</button>
+                                </td>
+                                <td>
+                                    <button onClick={()=>{
+                                        dispatch(deleteCart({id: cart.id}))
+                                    }}>x</button>
                                 </td>
                             </tr>
                         );
