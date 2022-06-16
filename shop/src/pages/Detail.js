@@ -17,6 +17,7 @@ let 제목 = styled.h4`
     color: ${(props) => props.색상};
 `;
 
+
 function Detail(props) {
 
     let {재고} = useContext(Context1);
@@ -64,6 +65,17 @@ function Detail(props) {
             shoe = elem;
         }
     });
+
+    // * 로컬스토리지를 이용한 최근 본 상품 표시하기 관련 코드
+    useEffect(() => {
+        let watchedData = localStorage.getItem('watched');
+        watchedData = JSON.parse(watchedData);
+        watchedData.unshift(shoe.id);
+        watchedData = new Set(watchedData);
+        watchedData = [...watchedData];
+        localStorage.setItem('watched', JSON.stringify(watchedData));
+        console.log(localStorage.getItem('watched'))
+    }, [])
 
     let [change, setChange] = useState(false);
 
